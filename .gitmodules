@@ -1,0 +1,3 @@
+[submodule "movie_searcher"] 
+  path = movie_searcher
+  url = https://github.com/FerProx90/movie_searcher
