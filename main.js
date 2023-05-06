@@ -19,29 +19,28 @@ function getMovie (){
         console.log(data)
         if (data.Response == "True"){
 
-        let genres = data.Genre.split();
-        const genresMap = genres.map(genre => "<div class='d-inline'>" + genre + "</div>");
+            let genres = data.Genre.split(",");
+            function getGenres(genresArray){
+                let genreBadge = ""
+                for (genre of genresArray){
+                    genreBadge += `<h3 class="col-auto badge bg-dark rounded-pill me-1"> ${genre} </h3>`;
+                }
+                console.log(genreBadge)
+                return genreBadge
+            }
 
-console.log(genresMap)
             cardBody.innerHTML = `
                 <h5 class="card-title mb-1">${data.Title}</h5>
                 <h6 class="card-subtitle text-muted mb-2">${data.Type} | ${data.Year}</h6>
-                <h6 class='card-subtitle text-start mb-2'>${genresMap}</h6>
+                <span class='card-subtitle text-start mb-2 col-12'>
+                    <div class="row g-0">
+                        ${getGenres(genres)}
+                    </div>
+                </span>
                 <img class="card-img mb-2" src="${data.Poster}" alt="">
                 <p class="card-text">${data.Plot}</p>
-                `
-        //    console.log(data);
-        //    result.innerHTML = `
-        //     <p>${data.Title}</p>
-        //     <p>${data.Year}</p>
-        //     <div>
-        //     ${data.Ratings.map(rating => 
-        //         "<p>" + rating.Value + "</p>"
-        //     )}
-        //     </div>
-        //     <p>${data.Plot}</p>
-        //     <img src=${data.Poster}>
-        //    `
+            `
+    
         }
         else{
             cardBody.innerHTML = "<h2>Movie not found</h2>"
